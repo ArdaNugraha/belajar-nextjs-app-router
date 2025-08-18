@@ -1,7 +1,9 @@
+import CreateForm from "./create";
+
 type Note = {
   id: number;
   title: string;
-  // add other fields if needed
+  description: string;
 };
 
 async function getNotes() {
@@ -15,10 +17,16 @@ export default async function Notes() {
   const notes = await getNotes();
 
   return (
-    <ul>
-      {(notes.data as Note[]).map((el) => (
-        <li key={el.id}>{el.title}</li>
-      ))}
-    </ul>
+    <>
+      <CreateForm />
+      <div className="grid grid-cols-4 gap-4">
+        {(notes.data as Note[]).map((el) => (
+          <div key={el.id} className="p-4 bg-white shadow-sm rounded-lg">
+            <h1>{el.title}</h1>
+            <p>{el.description}</p>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
