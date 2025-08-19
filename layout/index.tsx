@@ -1,11 +1,18 @@
-import { Geist, Geist_Mono } from "next/font/google";
+"use client";
+
+// import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+// import { useCount } from "@/context";
+import { dataStore } from "@/store/dataStore";
 
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // const { count } = useCount();
+  const { count } = dataStore();
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -40,7 +47,12 @@ export default function MainLayout({
             </ul>
           </div>
         </header>
-        <main className="flex-1 container mx-auto p-4">{children}</main>
+        <main className="flex-1 container mx-auto p-4">
+          <div>
+            <p>{`Count : ${count}`}</p>
+          </div>
+          {children}
+        </main>
         <footer className="bg-gray-700 text-white p-4 text-center">
           <p>&copy; {new Date().getFullYear()} Made with Passion</p>
         </footer>
